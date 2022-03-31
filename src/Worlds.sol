@@ -28,7 +28,7 @@ contract Worlds is ERC721A, Ownable, ReentrancyGuard {
 
   mapping(address => uint) public whitelist;
 
-  uint32 epoch = 1;
+
 
   string private baseUri = '';
 
@@ -97,15 +97,7 @@ contract Worlds is ERC721A, Ownable, ReentrancyGuard {
     saleConfig.whitelistStartTime = _whitelistStartTime;
   }
 
-  function increaseMaxSupply(uint32 _maxSupply) external onlyOwner {
-    if(saleConfig.maxSupply > _maxSupply) revert CannotReduceMaxSupply();
-    saleConfig.maxSupply = _maxSupply;
-  }
 
-  function increaseEpoch(uint32 _epoch) external onlyOwner {
-    if(epoch > _epoch) revert CannotReduceEpoch();
-    epoch = _epoch;
-  }
 
   function withdraw() public onlyOwner {
     (bool success, ) = payable(msg.sender).call{value: address(this).balance}("");
