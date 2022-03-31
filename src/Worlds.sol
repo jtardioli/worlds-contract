@@ -21,7 +21,6 @@ contract Worlds is ERC721A, Ownable, ReentrancyGuard {
     uint64 price;
     uint32 maxSupply;
     uint32 startTime;
-    uint32 whitelistStartTime;
   }
 
   SaleConfig public saleConfig;
@@ -36,7 +35,6 @@ contract Worlds is ERC721A, Ownable, ReentrancyGuard {
     saleConfig.price = 0.01 ether;
     saleConfig.maxSupply = 111;
     saleConfig.startTime = 1650844800; // April 25, 2020 - 12am
-    saleConfig.whitelistStartTime = 1650672000; // April 23, 2020 - 12am
   }
 
   function mintWorlds(uint _amount) external payable {
@@ -55,10 +53,10 @@ contract Worlds is ERC721A, Ownable, ReentrancyGuard {
   function whitelistMintWorlds(uint _amount) external payable nonReentrant {
     SaleConfig memory config = saleConfig;
     uint _maxSupply = uint(config.maxSupply);
-    uint _whitelistStartTime = uint(config.whitelistStartTime);
+    uint _startTime = uint(config.startTime);
 
     if(_currentIndex + _amount > _maxSupply) revert ExceedsMaxSupply();
-    if (block.timestamp < _whitelistStartTime) revert BeforeSaleStart();
+    if (block.timestamp < _startTime) revert BeforeSaleStart();
     if (_amount > whitelist[msg.sender]) revert ExceedsWhitelistAllowance();
 
     whitelist[msg.sender] -= _amount;
@@ -91,12 +89,6 @@ contract Worlds is ERC721A, Ownable, ReentrancyGuard {
   function updateStartTime(uint32 _startTime) external onlyOwner {
     saleConfig.startTime = _startTime;
   }
-
-
-  function updateWhitelistStartTime(uint32 _whitelistStartTime) external onlyOwner {
-    saleConfig.whitelistStartTime = _whitelistStartTime;
-  }
-
 
 
   function withdraw() public onlyOwner {
