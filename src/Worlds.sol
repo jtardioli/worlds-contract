@@ -10,8 +10,7 @@ error ExceedsMaxSupply();
 error BeforeSaleStart();
 error FailedTransfer();
 error ExceedsWhitelistAllowance();
-error CannotReduceMaxSupply();
-error CannotReduceEpoch();
+
 
 
 /// @author https://github.com/jtardioli
