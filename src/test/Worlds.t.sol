@@ -6,7 +6,7 @@ import "../Worlds.sol";
 import "openzeppelin-contracts/contracts/token/ERC721/IERC721Receiver.sol";
 import "lib/PBRMath.sol";
 
-
+// Why 2 expect reverts
 interface CheatCodes {
   function prank(address) external;
   function expectRevert(bytes4) external;
@@ -19,6 +19,7 @@ contract WorldsTest is DSTest {
     CheatCodes cheats = CheatCodes(HEVM_ADDRESS);
     Worlds worlds;
 
+    // what does this do
     function onERC721Recieved(address, address, uint256, bytes memory) public virtual returns(bytes4) {
         return this.onERC721Recieved.selector;
     }
@@ -47,7 +48,28 @@ contract WorldsTest is DSTest {
     }
 
 
+    // is the default address the owner? 
+    function testUpdateStartTimeAsOwner() public {
+        worlds.updateStartTime(1650000000);
+        (, , uint32 newStartTime ) = worlds.saleConfig();
+        assertEq(newStartTime, 1650000000);
+    }
+    
+    function testUpdateStartTimeAsNotOwner() public {
+        // Where does this string come from
+        cheats.expectRevert(bytes("Ownable: caller is not the owner"));
+        cheats.prank(address(0));
+        worlds.updateStartTime(1650000000);
+    }
 
- 
+    function testCannotMintBeforeStartTime() public {
+        worlds.updateStartTime(1650000000);
+        cheats.warp(1649999999);
+        (uint64 price, , ) = worlds.saleConfig();
+        // wut abi encoded
+        cheats.expectRevert(abi.encodeWithSignature("BeforeSaleStart()"));
+        //what is this syntax
+        worlds.mintWorlds{value: price -1}(1);
+    }
   
 }
