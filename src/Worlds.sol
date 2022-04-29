@@ -69,7 +69,7 @@ contract Worlds is ERC721A, Ownable, ReentrancyGuard {
     // Overflow impossible
     unchecked {
       for (uint256 i = 0; i < addresses.length; ++i) {
-        whitelist[addresses[i]] = 3;
+        whitelist[addresses[i]] = 2;
       }
     }
 
