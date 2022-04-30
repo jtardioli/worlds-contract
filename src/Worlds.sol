@@ -14,6 +14,7 @@ error ExceedsWhitelistAllowance();
 
 
 /// @author https://github.com/jtardioli
+
 contract Worlds is ERC721A, Ownable, ReentrancyGuard {
 
   struct SaleConfig {
@@ -26,9 +27,6 @@ contract Worlds is ERC721A, Ownable, ReentrancyGuard {
 
   mapping(address => uint) public whitelist;
 
-
-
-  string private baseUri = '';
 
   constructor() ERC721A("Worlds", "WLD") {
     saleConfig.price = 0.01 ether;
@@ -75,22 +73,18 @@ contract Worlds is ERC721A, Ownable, ReentrancyGuard {
 
   }
    
-  function setBaseUri(string calldata _baseUri) external onlyOwner {
-    baseUri = _baseUri;
-  }
+   function _baseURI() internal view virtual override returns (string memory) {
+        return "ipfs://sup/";
+    }
 
-  // Todo needs to be unique for each one
-  function tokenURI(uint _tokenId) public view override returns (string memory) {
-    if (!_exists(_tokenId)) revert URIQueryForNonexistentToken();
-    return baseUri;
-  }
+  
 
   function updateStartTime(uint32 _startTime) external onlyOwner {
     saleConfig.startTime = _startTime;
   }
 
 
-  function withdraw() public onlyOwner {
+  function withdraw() external onlyOwner {
     (bool success, ) = payable(msg.sender).call{value: address(this).balance}("");
     if (!success) revert FailedTransfer();
   }
