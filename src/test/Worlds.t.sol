@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity 0.8.13;
+pragma solidity 0.8.10;
 
 import "ds-test/test.sol";
 import "../Worlds.sol";
 import "openzeppelin-contracts/contracts/token/ERC721/IERC721Receiver.sol";
-import "lib/PBRMath.sol";
+import "../lib/PBRMath.sol";
 
 interface CheatCodes {
   function prank(address) external;
@@ -114,7 +114,7 @@ contract WorldsTest is IERC721Receiver, DSTest {
         worlds.mintWorlds{value: valueToSend}(maxSupply);
 
         string memory uri = worlds.tokenURI(1);
-        assertEq(uri, "ipfs://sup/1");
+        assertEq(uri, "https://worlds-server.herokuapp.com/api/token/1");
     }
 
     function testWithdraw() public {

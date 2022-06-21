@@ -1,7 +1,7 @@
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity 0.8.13;
+// SPDX-License-Identifier: MIT
+pragma solidity 0.8.10;
 
-import "lib/ERC721A.sol";
+import "./lib/ERC721A.sol";
 import "openzeppelin-contracts/contracts/access/Ownable.sol";
 import "solmate/utils/ReentrancyGuard.sol";
 
@@ -29,7 +29,7 @@ contract Worlds is ERC721A, Ownable, ReentrancyGuard {
 
 
   constructor() ERC721A("Worlds", "WLD") {
-    saleConfig.price = 0.01 ether;
+    saleConfig.price = 0.001 ether;
     saleConfig.maxSupply = 111;
     saleConfig.startTime = 1650844800; // April 25, 2020 - 12am
   }
@@ -74,7 +74,7 @@ contract Worlds is ERC721A, Ownable, ReentrancyGuard {
   }
    
    function _baseURI() internal view virtual override returns (string memory) {
-        return "ipfs://sup/";
+        return "https://worlds-server.herokuapp.com/api/token/";
     }
 
   
@@ -91,3 +91,4 @@ contract Worlds is ERC721A, Ownable, ReentrancyGuard {
 
 
 }
+
