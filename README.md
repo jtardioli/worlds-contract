@@ -24,3 +24,4 @@ Worlds is a complete ERC721 NFT project deployed on Rinkeby. The Project is divi
 - Opensea API
 - Express
 - Typescript
+- Rainbowkit
