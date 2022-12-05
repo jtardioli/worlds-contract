@@ -1,4 +1,7 @@
 ## Worlds Nft
+
+DEPRICATED DUE TO MERGE
+
 - [Live App](https://www.worldsnft.xyz/)
 - [Frontend Repo](https://github.com/jtardioli/worlds-frontend)
 - [Server Repo](https://github.com/jtardioli/worlds-server)
