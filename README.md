@@ -4,6 +4,13 @@ This app was deployed on rinkby test net and the free version of heroku
 both of which no longer exist... 
 one day I will get around to redeploying it
 
+
+Experience the ever-changing beauty of Worlds by viewing a newly generated solar system each time you refresh the page.
+
+https://github.com/jtardioli/worlds-contract/assets/85530348/249fa0e9-054e-4a8a-97e8-008bbef4eb7f
+
+
+
 - [Live App](https://worlds-frontend-fuo6e72ts-jtardioli.vercel.app/)
 - [Frontend Repo](https://github.com/jtardioli/worlds-frontend)
 - [Server Repo](https://github.com/jtardioli/worlds-server)
