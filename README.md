@@ -1,8 +1,10 @@
 ## Worlds Nft
 
-DEPRICATED DUE TO MERGE
+This app was deployed on rinkby test net and the free version of heroku
+both of which no longer exist... 
+one day I will get around to redeploying it
 
-- [Live App](https://www.worldsnft.xyz/)
+- [Live App](https://worlds-frontend-fuo6e72ts-jtardioli.vercel.app/)
 - [Frontend Repo](https://github.com/jtardioli/worlds-frontend)
 - [Server Repo](https://github.com/jtardioli/worlds-server)
 
